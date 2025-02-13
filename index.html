@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>для шмакодявки</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s ease-in;
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            color: #ff1493;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        #timer {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d10072;
+            margin-top: 20px;
+        }
+        .message {
+            font-size: 14px;
+            color: #fff;
+            position: absolute;
+            top: 10px;
+            text-align: center;
+            width: 90%;
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            position: absolute;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background: #ff69b4;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+            max-width: 80%;
+            white-space: nowrap;
+        }
+        .button:hover {
+            background: #ff1493;
+            transform: scale(1.1);
+        }
+        .button:active {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        полинка, я очень сильно тебя люблю<br>
+        открывай этот сайт, если тебе когда-то<br>
+        будет тяжело в наших отношениях,<br>
+        если я вдруг тебя чем-то обижу и тд, хочу чтобы ты знала,<br>
+        мои чувства к тебе всегда есть и будут искренне<br>
+        <br>
+        p.s. твой лешка
+    </div>
+    <h1>&lt;3 Два нефорёнка вместе уже &lt;3</h1>
+    <div id="timer">Загрузка...</div>
+    <button class="button" id="floatingButton" onclick="showMessage()">Нажми меня 💖</button>
+    
+    <script>
+        const messages = [
+            "Я тебя люблю",
+            "Я тебя обожаю",
+            "Ты лучшая",
+            "Ты прекрасная",
+            "У тебя ахуенный характер",
+            "У тебя милое личико",
+            "Я тебе доверяю",
+            "Я тебя ценю",
+            "У тебя милые глазки",
+            "Ты шмакодявка"
+        ];
+
+        function updateTimer() {
+            const startDate = new Date("2024-12-28T21:49:00");
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById("timer").innerText = 
+                `${months} месяцев, ${days} дней, ${hours} часов, ${minutes} минут, ${seconds} секунд`;
+        }
+        
+        function showMessage() {
+            const button = document.getElementById("floatingButton");
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            button.innerText = randomMessage;
+            button.disabled = true;
+            setTimeout(() => {
+                button.innerText = "Нажми меня 💖";
+                button.disabled = false;
+                moveButton();
+            }, 5000);
+        }
+        
+        function moveButton() {
+            const button = document.getElementById("floatingButton");
+            const maxX = window.innerWidth * 0.8;
+            const maxY = window.innerHeight * 0.8;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+        
+        updateTimer();
+        setInterval(updateTimer, 1000);
+        moveButton();
+    </script>
+</body>
+</html>
